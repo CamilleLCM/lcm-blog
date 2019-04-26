@@ -24,23 +24,36 @@ class PostController extends Controller
     }
     //创建逻辑
     public function store(CreateRequest $request){
-            $post = Post::create([
+        //验证通过后保存进数据库
+            Post::create([
                 'title' => $request->title,
                 'content' => $request->contents
             ]);
+            //渲染页面
             return redirect("/posts");
 
     }
     //编辑页面
-    public function edit(){
-        return view('post/edit');
+    public function edit(Post $post){
+        return view('post/edit',compact('post'));
     }
     //编辑逻辑
-    public function update(){
-
+    public function update(CreateRequest $request ,Post $post){
+        //验证通过后保存进数据库
+       $post->title = $request->title;
+       $post->content = $request->contents;
+       $post->save();
+        return redirect("/posts/{$post->id}");
     }
     //删除逻辑
-    public function delete(){
-
+    public function delete(Post $post){
+        //TODO:用户的权限认证必须为作者才能删除
+       $post->delete();
+       return redirect("/posts");
+    }
+    //上传图片
+    public function imageUpload(Request $request){
+        $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/'.$path);
     }
 }

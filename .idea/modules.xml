@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../laravel/.idea/laravel.iml" filepath="$PROJECT_DIR$/../laravel/.idea/laravel.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lcmBlog.iml" filepath="$PROJECT_DIR$/.idea/lcmBlog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../server/.idea/server.iml" filepath="$PROJECT_DIR$/../server/.idea/server.iml" />
       <module fileurl="file://$PROJECT_DIR$/../server-api/.idea/server-api.iml" filepath="$PROJECT_DIR$/../server-api/.idea/server-api.iml" />
     </modules>
   </component>

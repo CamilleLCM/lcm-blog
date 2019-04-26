@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-
+//数据库填充
 $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(6),
