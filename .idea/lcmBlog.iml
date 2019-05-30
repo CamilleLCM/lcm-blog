@@ -87,5 +87,8 @@
     <orderEntry type="module" module-name="laravel" />
     <orderEntry type="module" module-name="server-api" />
     <orderEntry type="module" module-name="server" />
+    <orderEntry type="module" module-name="thirdshop" />
+    <orderEntry type="module" module-name="server-api" />
+    <orderEntry type="module" module-name="lcm" />
   </component>
 </module>

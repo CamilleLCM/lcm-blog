@@ -1,5 +1,23 @@
 <?php
+//用户相关接口
+    Route::prefix('/user')->group(function (){
+        //用户注册页面
+        Route::get('/register','\App\Http\Controllers\RegisterController@index');
+        //用户注册逻辑
+        Route::post('/register','\App\Http\Controllers\RegisterController@register');
+        //用户登录界面
+        Route::get('/login','\App\Http\Controllers\LoginController@index');
+        //用户登录逻辑
+        Route::post('/login','\App\Http\Controllers\LoginController@login');
+        //用户登出逻辑
+        Route::get('/logout','\App\Http\Controllers\LoginController@logout');
+        //个人设置页面
+        Route::get('/myself/setting','\App\Http\Controllers\UserController@setting');
+        //个人设置逻辑
+        Route::post('/myself/setting','\App\Http\Controllers\UserController@settingStore');
+    });
 
+//文章相关接口
     Route::prefix('/posts')->group(function () {
         //文章列表页
         Route::get('/', '\App\Http\Controllers\PostController@index');

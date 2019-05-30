@@ -20,7 +20,7 @@ class PostController extends Controller
     //创建页面
     public function create(){
 
-        return view('post/create');
+        return view('post.create');
     }
     //创建逻辑
     public function store(CreateRequest $request){

@@ -11,11 +11,11 @@
                 </ol><!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="http://ww1.sinaimg.cn/large/44287191gw1excbq6tb3rj21400migrz.jpg" alt="..." />
+                        <img src="https://i.loli.net/2019/05/27/5ceb9bc8469f416731.jpg" alt="..." />
                         <div class="carousel-caption">...</div>
                     </div>
                     <div class="item">
-                        <img src="http://ww3.sinaimg.cn/large/44287191gw1excbq5iwm6j21400min3o.jpg" alt="..." />
+                        <img src="https://i.loli.net/2019/05/27/5ceb9bef58e3947328.jpg" alt="..." />
                         <div class="carousel-caption">...</div>
                     </div>
                     <div class="item">
