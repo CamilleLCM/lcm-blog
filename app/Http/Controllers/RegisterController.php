@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -14,7 +14,7 @@ class RegisterController extends Controller
     }
     //用户注册逻辑
     public function register(RegisterRequest $request){
-        $user = Users::Create([
+        $user = User::Create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
@@ -22,7 +22,7 @@ class RegisterController extends Controller
         if($user){
             return redirect('user/login');
         }else{
-            return "注册失败，请重试";
+            return \Redirect::back()->withErrors("注册失败请重试");
         }
     }
 }

@@ -24,10 +24,12 @@ class PostController extends Controller
     }
     //创建逻辑
     public function store(CreateRequest $request){
+        $user_id = \Auth::id();
         //验证通过后保存进数据库
             Post::create([
                 'title' => $request->title,
-                'content' => $request->contents
+                'content' => $request->contents,
+                'user_id' => $user_id
             ]);
             //渲染页面
             return redirect("/posts");
@@ -39,6 +41,7 @@ class PostController extends Controller
     }
     //编辑逻辑
     public function update(CreateRequest $request ,Post $post){
+        $this->authorize('update', $post);
         //验证通过后保存进数据库
        $post->title = $request->title;
        $post->content = $request->contents;
@@ -47,7 +50,7 @@ class PostController extends Controller
     }
     //删除逻辑
     public function delete(Post $post){
-        //TODO:用户的权限认证必须为作者才能删除
+        $this->authorize('delete', $post);
        $post->delete();
        return redirect("/posts");
     }

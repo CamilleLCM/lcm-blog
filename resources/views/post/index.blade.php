@@ -19,7 +19,7 @@
                         <div class="carousel-caption">...</div>
                     </div>
                     <div class="item">
-                        <img src="http://ww2.sinaimg.cn/large/44287191gw1excbq4kx57j21400migs4.jpg" alt="..." />
+                        <img src="https://i.loli.net/2019/06/04/5cf613c23f97053112.jpeg" alt="..." />
                         <div class="carousel-caption">...</div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             @foreach($posts as $post)
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="posts/{{$post->id}}" >{{$post->title}}</a></h2>
-                    <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="/user/5">Kassandra Ankunding2</a></p>
+                    <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="/user/5">{{$post->user->name}}</a></p>
 
                   {!!str_limit($post->content,100,'...')!!}
 
