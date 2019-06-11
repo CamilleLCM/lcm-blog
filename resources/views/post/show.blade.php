@@ -34,24 +34,26 @@
 
             <!-- List group -->
             <ul class="list-group">
+                @foreach($post->comment as $com)
                 <li class="list-group-item">
-                    <h5>2017-05-28 10:15:08 by Kassandra Ankunding2</h5>
+                    <h5>{{$com->created_at}} by {{$com->user->name}}</h5>
                     <div>
-                        这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论
+                       {{$com->content}}
                     </div>
                 </li>
+                    @endforeach
             </ul>
         </div>
 
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">发表评论</div>
-
             <!-- List group -->
             <ul class="list-group">
-                <form action="/posts/comment" method="post">
-                    <input type="hidden" name="_token" value="4BfTBDF90Mjp8hdoie6QGDPJF2J5AgmpsC9ddFHD">
+                <form action="/posts/{{$post->id}}/comment" method="POST">
+                    {{csrf_field()}}
                     <input type="hidden" name="post_id" value="62"/>
+                    @include("layout.error")
                     <li class="list-group-item">
                         <textarea name="content" class="form-control" rows="10"></textarea>
                         <button class="btn btn-default" type="submit">提交</button>

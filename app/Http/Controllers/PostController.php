@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\CreateRequest;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -10,11 +12,12 @@ class PostController extends Controller
 {
     //文章列表
     public function index(){
-        $posts = Post::orderByDesc('created_at')->paginate(6);
+        $posts = Post::orderByDesc('created_at')->withCount('comment')->paginate(6);
         return view('post/index',compact('posts'));
     }
     //文章详情
     public function show(Post $post){
+        $post->load('comment');
         return view('post/show',['post'=>$post],['isShow'=>true]);
     }
     //创建页面
@@ -41,6 +44,7 @@ class PostController extends Controller
     }
     //编辑逻辑
     public function update(CreateRequest $request ,Post $post){
+        //设置修改权限
         $this->authorize('update', $post);
         //验证通过后保存进数据库
        $post->title = $request->title;
@@ -50,6 +54,7 @@ class PostController extends Controller
     }
     //删除逻辑
     public function delete(Post $post){
+        //设置删除权限
         $this->authorize('delete', $post);
        $post->delete();
        return redirect("/posts");
@@ -58,5 +63,16 @@ class PostController extends Controller
     public function imageUpload(Request $request){
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/'.$path);
+    }
+
+    //发表评论
+    public function comment(CommentRequest $request,Post $post){
+        //保存评论
+        $comment = new Comment();
+        $comment->user_id = \Auth::id();
+        $comment->content = $request->input('content');
+        $post->comment()->save($comment);
+        //页面渲染
+        return back();
     }
 }

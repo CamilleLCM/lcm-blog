@@ -33,6 +33,8 @@
         Route::get('/{post}/delete', '\App\Http\Controllers\PostController@delete');
         //图片上传
         Route::post('/image/upload', '\App\Http\Controllers\PostController@imageUpload');
+        //文章评论
+        Route::post('/{post}/comment','\App\Http\Controllers\PostController@comment');
     });
 
 
