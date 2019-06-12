@@ -23,8 +23,11 @@
 
             {!! $post->content !!}
             <div>
-                <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
-
+                @if($post->zan(\Auth::id())->exists())
+                    <a href="/posts/{{$post->id}}/unZan" type="button" class="btn btn-default btn-lg">取消赞</a>
+                @else
+                    <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
+                @endif
             </div>
         </div>
 
@@ -35,13 +38,13 @@
             <!-- List group -->
             <ul class="list-group">
                 @foreach($post->comment as $com)
-                <li class="list-group-item">
-                    <h5>{{$com->created_at}} by {{$com->user->name}}</h5>
-                    <div>
-                       {{$com->content}}
-                    </div>
-                </li>
-                    @endforeach
+                    <li class="list-group-item">
+                        <h5>{{$com->created_at}} by {{$com->user->name}}</h5>
+                        <div>
+                            {{$com->content}}
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
 

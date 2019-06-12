@@ -26,6 +26,10 @@
         Route::post('/', '\App\Http\Controllers\PostController@store');
         //文章详情页
         Route::get('/{post}', '\App\Http\Controllers\PostController@show');
+        //文章赞
+        Route::get('/{post}/zan', '\App\Http\Controllers\PostController@zan');
+        //取消文章赞
+        Route::get('/{post}/unZan', '\App\Http\Controllers\PostController@unZan');
         //编辑文章
         Route::get('/{post}/edit', '\App\Http\Controllers\PostController@edit');
         Route::put('/{post}', '\App\Http\Controllers\PostController@update');

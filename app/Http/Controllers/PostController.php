@@ -6,13 +6,14 @@ use App\Http\Requests\CommentRequest;
 use App\Http\Requests\CreateRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Zan;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     //文章列表
     public function index(){
-        $posts = Post::orderByDesc('created_at')->withCount('comment')->paginate(6);
+        $posts = Post::orderByDesc('created_at')->withCount(['comment','zan'])->paginate(6);
         return view('post/index',compact('posts'));
     }
     //文章详情
@@ -74,5 +75,22 @@ class PostController extends Controller
         $post->comment()->save($comment);
         //页面渲染
         return back();
+    }
+
+    //用户对文章进行赞
+    public function zan(Post $post){
+
+        $params = [
+            'user_id'=>\Auth::id(),
+            'post_id'=>$post->id,
+        ];
+        Zan::firstOrCreate($params);
+        return back();
+    }
+
+    //用户对文章取消赞
+    public function unZan(Post $post){
+       $post->userZan(\Auth::id())->delete();
+       return back();
     }
 }
