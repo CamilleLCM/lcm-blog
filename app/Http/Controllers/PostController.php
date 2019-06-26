@@ -84,6 +84,7 @@ class PostController extends Controller
             'user_id'=>\Auth::id(),
             'post_id'=>$post->id,
         ];
+        //firstOrCreate表里有相同的数据就查询没有就新建一条
         Zan::firstOrCreate($params);
         return back();
     }

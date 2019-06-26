@@ -25,11 +25,12 @@
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 </head>
 
 <body>
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <div class="container">
     <form class="form-signin" method="POST" action="/user/register">
         {{csrf_field()}}
@@ -40,8 +41,14 @@
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="邮箱" required autofocus>
         <label for="inputPassword" class="sr-only">密码</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="输入密码" required>
-        <label class="sr-only">重复密码</label>
-        <input type="password" name="password_confirmation" class="form-control" placeholder="重复输入密码" required>
+        <label for="inputPass" class="sr-only">重复密码</label>
+        <input type="password" name="password_confirmation" id="inputPass" class="form-control" placeholder="重复输入密码" required>
+        <label  class="sr-only">手机号码</label>
+        <input type="number" name="mobile"  class="form-control" placeholder="请输入手机号码" required>
+        <input type="number" name="verifyCode" id="">
+        <button id = "sendVerifySmsButton">获取验证码</button>
+
+
         @include("layout.error")
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
     </form>
@@ -50,3 +57,22 @@
 
 </body>
 </html>
+<script src="/js/laravel-sms.js"></script>
+<script>
+    $('#sendVerifySmsButton').sms({
+        //laravel csrf token
+        token       : "{{csrf_token()}}",
+        //请求间隔时间
+        interval    : 60,
+        //请求参数
+        requestData : {
+            //手机号
+            mobile : function () {
+                return $('input[name=mobile]').val();
+            },
+            //手机号的检测规则
+            // mobile_rule : 'mobile_required'
+        }
+    });
+</script>
+
