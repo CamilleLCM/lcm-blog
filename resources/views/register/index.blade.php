@@ -46,15 +46,18 @@
         <label  class="sr-only">手机号码</label>
         <input type="number" name="mobile"  class="form-control" placeholder="请输入手机号码" required>
         <input type="number" name="verifyCode" id="">
-        <button id = "sendVerifySmsButton">获取验证码</button>
-
-
-        @include("layout.error")
+        <button id = "sendVerifySmsButton" >获取验证码</button>
+        @if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                        @break
+                @endforeach
+            </div>
+        @endif
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
     </form>
-
 </div> <!-- /container -->
-
 </body>
 </html>
 <script src="/js/laravel-sms.js"></script>
@@ -71,7 +74,7 @@
                 return $('input[name=mobile]').val();
             },
             //手机号的检测规则
-            // mobile_rule : 'mobile_required'
+            mobile_rule : 'mobile_required'
         }
     });
 </script>

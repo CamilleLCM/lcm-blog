@@ -26,7 +26,8 @@ class RegisterRequest extends FormRequest
         return [
             'name'=>'required|max:10|unique:users,name',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required|min:6|max:15|confirmed'
+            'password'=>'required|min:6|max:15|confirmed',
+            'mobile'=>'unique:users,mobile|required',
         ];
     }
     public function messages(){
@@ -40,7 +41,9 @@ class RegisterRequest extends FormRequest
             'password.required'=>'密码不能为空',
             'password.min'=>'密码不能小于6位字符',
             'password.max'=>'密码不能大于15位字符',
-            'password.confirmed'=>'两次密码输入不同请重新输入'
+            'password.confirmed'=>'两次密码输入不同请重新输入',
+            'mobile.unique'=>'该手机号已被注册',
+            'mobile.required'=>'手机号不能为空',
         ];
     }
 }

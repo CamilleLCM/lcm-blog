@@ -15,12 +15,12 @@ class LoginController extends Controller
     }
     //用户登录逻辑
     public function login(LoginRequest $request){
-        $user = $request->only('email','password');
+        $user = $request->only('mobile','password');
         $is_remember = boolval($request->input('is_remember')) ;
         if(\Auth::attempt($user,$is_remember)){
             return redirect('/posts');
         }else{
-            return \Redirect::back()->withErrors('邮箱或密码错误');
+            return \Redirect::back()->withErrors('手机号或密码错误');
         }
     }
     //用户登出逻辑

@@ -24,14 +24,15 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required|email',
+            'mobile'=>['required','exists:users,mobile','regex:/^1(3|4|5|7|8)\d{9}$/'],
             'password'=>'required|min:6|max:15'
         ];
     }
     public function messages(){
         return[
-            'email.required'=>'邮箱不能为空',
-            'email.email'=>'邮箱格式不正确',
+            'mobile.required'=>'手机号不能为空',
+            'mobile.exists'=>'该手机号未注册请先注册后再登录',
+            'mobile.regex'=>'手机号格式不正确',
             'password.required'=>'密码不能为空',
             'password.min'=>'密码不能小于6位字符',
             'password.max'=>'密码不能大于15位字符',
